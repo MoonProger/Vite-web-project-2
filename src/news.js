@@ -21,7 +21,6 @@ document.querySelector('.card').appendChild(loadMoreBtn);
 let lastNextPageToken = null;
 let allLoadedNews = [];
 
-// --- статичные категории ---
 const STATIC_CATEGORIES = [
   'business',
   'crime',
@@ -42,7 +41,6 @@ const STATIC_CATEGORIES = [
   'world',
 ];
 
-// --- утилиты ---
 function parseNewsdataResponse(raw) {
   if (!raw) return [];
   if (Array.isArray(raw)) return raw;
@@ -125,7 +123,6 @@ function renderList(list, append = false) {
   list.forEach((a) => newsList.appendChild(createNewsCard(a)));
 }
 
-// --- категории ---
 function populateCategoryOptions() {
   categorySelect.innerHTML = '<option value="">All Categories</option>';
   STATIC_CATEGORIES.forEach((c) => {
@@ -136,7 +133,6 @@ function populateCategoryOptions() {
   });
 }
 
-// --- API ---
 async function fetchFromNewsdata({ q = '', category = '', pageToken = null } = {}) {
   const params = new URLSearchParams();
   params.set('apikey', NEWSDATA_API_KEY);
@@ -154,13 +150,12 @@ async function fetchFromNewsdata({ q = '', category = '', pageToken = null } = {
   return { results, nextPage: next };
 }
 
-// --- загрузка ---
 async function loadNews({ reset = true, pageToken = null } = {}) {
   if (reset) {
     newsList.innerHTML = '';
     allLoadedNews = [];
   }
-  showMsg(newsMsg, 'Загрузка новостей...');
+  showMsg(newsMsg, 'Loading news...');
 
   try {
     const q = qInput.value.trim();
@@ -190,7 +185,6 @@ async function loadNews({ reset = true, pageToken = null } = {}) {
   }
 }
 
-// --- кнопки ---
 loadMoreBtn.addEventListener('click', async () => {
   if (lastNextPageToken) {
     loadMoreBtn.disabled = true;
@@ -212,6 +206,6 @@ qInput.addEventListener('keyup', (e) => {
   if (e.key === 'Enter') loadNews();
 });
 
-// --- старт ---
+// старт
 populateCategoryOptions();
 loadNews();

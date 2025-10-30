@@ -3,7 +3,7 @@ import { el, safeFetch, setImageFallback, showMsg } from './common.js';
 const CAT_API_KEY = 'live_GoEF46RcwWwsh5P8iTYddqNnwQHAy7G2BvZzsEZ13zMHlJMBcJzszJ8f8XrCtOOU';
 const BASE = 'https://api.thecatapi.com/v1';
 const SUB_ID = 'user-123';
-const favouriteByImageId = new Map(); // image_id -> favouriteId
+const favouriteByImageId = new Map();
 let isShowingFavourites = false;
 
 const catsList = document.getElementById('catsList');
@@ -32,7 +32,6 @@ function createCatCard(obj){
     overlay.appendChild(title);
   }
 
-  // actions row
   const actions = document.createElement('div');
   actions.className = 'card-actions';
 
@@ -74,7 +73,6 @@ function createCatCard(obj){
     if(likeBtn.dataset.loading === '1') return;
     try{
       likeBtn.dataset.loading = '1';
-      // toggle: если уже в избранном — удалить, иначе создать
       if(favouriteByImageId.has(obj.id)){
         const favId = favouriteByImageId.get(obj.id);
         await safeFetch(`${BASE}/favourites/${encodeURIComponent(favId)}`, {
@@ -83,7 +81,6 @@ function createCatCard(obj){
         });
         favouriteByImageId.delete(obj.id);
         likeBtn.classList.remove('active');
-        // если мы на странице избранного — убрать карточку из DOM
         if(isShowingFavourites && card.parentElement){
           card.remove();
         }
@@ -94,19 +91,16 @@ function createCatCard(obj){
           headers: { 'x-api-key': CAT_API_KEY, 'content-type': 'application/json' },
           body
         });
-        // ответ содержит id нового избранного
         const favId = res && (res.id || res.message?.id) ? (res.id || res.message.id) : null;
         if(favId !== null && favId !== undefined){
           favouriteByImageId.set(obj.id, favId);
         }else{
-          // на случай, если API вернул не по схеме, можно рефрешнуть кэш
           await refreshFavouritesCache();
         }
         likeBtn.classList.add('active');
       }
     }catch(err){
-      console.error('Ошибка добавления в избранное', err);
-      alert('Не удалось добавить в избранное: ' + err.message);
+      console.error('Ошибка добавления избранное', err);
     }finally{
       delete likeBtn.dataset.loading;
     }
@@ -137,7 +131,7 @@ async function loadBreeds(){
 async function loadCats(breedId = ''){
   isShowingFavourites = false;
   catsList.innerHTML = '';
-  showMsg(catsMsg, 'Loading...');
+  showMsg(catsMsg, 'Loading cats...');
   try{
     let url = `${BASE}/images/search?limit=30&size=med`;
     if(breedId) url += `&breed_ids=${encodeURIComponent(breedId)}`;
@@ -170,7 +164,6 @@ async function loadFavourites(){
     favs.forEach(f => {
       const item = { id: f.image_id, url: f.image && f.image.url ? f.image.url : PLACEHOLDER };
       const card = createCatCard(item);
-      // отметить как лайкнутую
       const like = card.querySelector('.btn-like');
       if(like) like.classList.add('active');
       catsList.appendChild(card);

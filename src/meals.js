@@ -55,7 +55,7 @@ function renderMeals(items){
 
 async function searchMeals(q){
   mealsList.innerHTML = '';
-  showMsg(mealMsg,'Loading...');
+  showMsg(mealMsg,'Loading your meals...');
   try{
     const url = `${BASE}/search.php?s=${encodeURIComponent(q)}`;
     const data = await safeFetch(url);
@@ -68,7 +68,7 @@ async function searchMeals(q){
 
 async function randomMeal(){
   mealsList.innerHTML = '';
-  showMsg(mealMsg,'Loading...');
+  showMsg(mealMsg,'Loading random meal...');
   try{
     const data = await safeFetch(`${BASE}/random.php`);
     renderMeals(data.meals || []);
@@ -82,11 +82,10 @@ async function loadByFilters(){
   const c = (mealCategory && mealCategory.value) || '';
   const a = (mealArea && mealArea.value) || '';
   if(!c && !a){
-    // если фильтры сняты, показать общий поиск
     return searchMeals('');
   }
   mealsList.innerHTML = '';
-  showMsg(mealMsg,'Loading...');
+  showMsg(mealMsg,'Loading special meals...');
   try{
     const params = new URLSearchParams();
     if(c) params.set('c', c);
@@ -130,15 +129,12 @@ async function showDetail(id){
 
 mealSearch.addEventListener('click', ()=> {
   const q = mealQ.value.trim();
-  // Popular: пустой запрос
   if(!q) return searchMeals('');
-  // если введён текст и жмут Popular — тоже выполним обычный search
   searchMeals(q);
 });
 mealRandom.addEventListener('click', randomMeal);
 if(mealCategory){
   mealCategory.addEventListener('change', ()=>{
-    // при выборе категории сбрасываем страну и строку поиска
     if(mealArea) mealArea.value = '';
     if(mealQ) mealQ.value = '';
     loadByFilters();
@@ -146,18 +142,15 @@ if(mealCategory){
 }
 if(mealArea){
   mealArea.addEventListener('change', ()=>{
-    // при выборе страны сбрасываем категорию и строку поиска
     if(mealCategory) mealCategory.value = '';
     if(mealQ) mealQ.value = '';
     loadByFilters();
   });
 }
 
-// Enter запускает поиск по имени
 mealQ.addEventListener('keyup', (e)=>{
   if(e.key === 'Enter'){
     const q = mealQ.value.trim();
-    // если поиск по названию (не пустой), сбрасываем все фильтры
     if(q){
       if(mealCategory) mealCategory.value = '';
       if(mealArea) mealArea.value = '';
