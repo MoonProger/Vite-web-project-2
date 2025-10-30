@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Cats — TheCatAPI</title>
+  <script type="module" crossorigin src="./assets/cats-BH_nw0fb.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/common-DKrip_BD.js">
+  <link rel="stylesheet" crossorigin href="./assets/common-CJEt0e7s.css">
+</head>
+<body>
+  <div class="container">
+    <div class="site-nav"></div>
+    <header class="header">
+      <h1>Your daily dose of meow :3</h1>
+    </header>
+
+    <section class="card">
+      <div class="search-row">
+        <label for="breedSelect" class="small">Breed:</label>
+        <select id="breedSelect" class="input">
+          <option value="">All breeds</option>
+        </select>
+        <button id="refreshCats">New bunch of kitties</button>
+        <button id="favouritesBtn">Favourites</button>
+      </div>
+      <div id="catsMsg" class="small"></div>
+      <div id="catsList" class="grid"></div>
+      <!-- <div class="small">Source: TheCatAPI (используется API-ключ для увеличения лимитов).</div> -->
+    </section>
+  </div>
+
+</body>
+</html>

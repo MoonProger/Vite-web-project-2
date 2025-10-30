@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>News — Newsdata</title>
+  <script type="module" crossorigin src="./assets/main-S7BMe04r.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/common-DKrip_BD.js">
+  <link rel="stylesheet" crossorigin href="./assets/common-CJEt0e7s.css">
+</head>
+<body>
+  <div class="container">
+    <div class="site-nav"></div>
+    <header class="header">
+      <h1>American news — stay tuned, stay informed!</h1>
+    </header>
+
+    <section class="card">
+      <div class="controls">
+        <input id="q" class="input" placeholder="Search by key words" />
+        <select id="categorySelect" class="input">
+          <option value="">All categories</option>
+        </select>
+        <button id="refreshBtn">Hot news</button>
+      </div>
+
+      <div id="newsMsg" class="small"></div>
+      <div id="newsList" class="grid news-list"></div>
+    </section>
+  </div>
+
+</body>
+</html>
