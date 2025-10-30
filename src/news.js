@@ -1,6 +1,6 @@
 import { el, safeFetch, showMsg, setImageFallback } from './common.js';
 
-const NEWSDATA_API_KEY = 'pub_259d54bf4a604f0991e8338ff56ce0de';
+const NEWSDATA_API_KEY = 'pub_a984c5d2fb4c4ca2b25b70a5e1fb80d0';
 const NEWSDATA_BASE = 'https://newsdata.io/api/1/latest';
 const COUNTRY = 'us';
 
