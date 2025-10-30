@@ -188,10 +188,16 @@ async function refreshFavouritesCache(returnList = false){
   return returnList ? favs : void 0;
 }
 
-refreshBtn.addEventListener('click', ()=> loadCats(breedSelect.value));
+refreshBtn.addEventListener('click', ()=> {
+  breedSelect.value = '';
+  loadCats();
+});
 breedSelect.addEventListener('change', ()=> loadCats(breedSelect.value));
 if(favouritesBtn){
-  favouritesBtn.addEventListener('click', ()=> loadFavourites());
+  favouritesBtn.addEventListener('click', ()=> {
+    breedSelect.value = '';
+    loadFavourites();
+  });
 }
 
 loadBreeds().then(()=> loadCats());

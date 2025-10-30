@@ -11,7 +11,7 @@ const categorySelect = document.getElementById('categorySelect');
 const newsList = document.getElementById('newsList');
 const newsMsg = document.getElementById('newsMsg');
 
-const PLACEHOLDER = '/default_image.png';
+const PLACEHOLDER = new URL('../default_image.png', import.meta.url).href;
 const loadMoreBtn = document.createElement('button');
 loadMoreBtn.textContent = 'Загрузить ещё';
 loadMoreBtn.className = 'load-more-btn';
