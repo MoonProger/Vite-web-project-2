@@ -1,0 +1,165 @@
+:root{
+    --bg:#f4f6fb;
+    --card:#ffffff;
+    --muted:#6b7280;
+    --accent:#0f62fe;
+    --gap:14px;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:#0f1724;padding:22px}
+.site-nav{display:flex;justify-content:center;margin-bottom:30px}
+.site-nav .nav-center{display:flex;gap:8px;align-items:center}
+.site-nav a{text-decoration:none;color:var(--accent);font-weight:600;font-size: large;}
+.header{display:block;margin-bottom:20px}
+  nav a{text-decoration:none;color:var(--accent);font-weight:600}
+  .container{max-width:1100px;margin:0 auto}
+  .grid{display:grid;grid-template-columns: repeat(auto-fill,minmax(260px,1fr));gap:var(--gap)}
+  .card{background:var(--card);border-radius:12px;padding:14px;box-shadow:0 6px 20px rgba(16,24,40,0.06)}
+  .card img{width:100%;height:180px;object-fit:cover;border-radius:10px 10px 8px 8px;display:block}
+  .card { cursor: default; }
+  .search-row{display:flex;gap:10px;margin-bottom:14px;align-items:center}
+  .input,button,select{padding:8px 10px;border-radius:10px;border:1px solid #e6e9ef;background:white}
+  button{background:var(--accent);color:#fff;border:none;cursor:pointer}
+  .small{font-size:0.9rem;color:var(--muted)}
+  .article-title{font-weight:700;margin:8px 0}
+  .article-meta{font-size:0.85rem;color:var(--muted)}
+  .footer{margin-top:28px;font-size:0.9rem;color:var(--muted)}
+  
+  /* Card fancy layout: image + overlay */
+  .card-item{
+    position:relative;
+    border-radius:12px;
+    overflow:hidden;
+    transition: transform .22s cubic-bezier(.2,.9,.2,1), box-shadow .22s;
+    box-shadow: 0 6px 18px rgba(12,18,30,0.04);
+  }
+  .card-item:hover{
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 18px 40px rgba(12,18,30,0.12);
+    cursor:pointer;
+  }
+  .card-media{display:block; width:100%; height:180px; object-fit:cover;}
+  .card-overlay{
+    position:absolute;
+    left:0; right:0; bottom:0;
+    padding:12px;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.45) 60%, rgba(0,0,0,0.65) 100%);
+    color:white;
+  }
+  .card-overlay .title{font-weight:700; font-size:1rem; margin-bottom:6px}
+  .card-overlay .meta{font-size:0.85rem; color:rgba(255,255,255,0.85)}
+  .card-actions{display:flex; align-items:center; justify-content:space-between; gap:10px;}
+  .card-actions .left{display:flex; align-items:center; gap:8px}
+  .btn-icon{display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:999px; border:2px solid rgba(255,255,255,0.85); background:transparent; color:#fff; cursor:pointer}
+  .btn-icon:hover{background:rgba(255,255,255,0.15)}
+  .btn-icon.active{background:#fff; color:#111827}
+  .btn-like{border-color:#fda4af; color:#fecdd3}
+  .btn-like.active{background:#f43f5e; border-color:#f43f5e; color:#fff}
+  .meal-title{ text-align:center; font-weight:700; padding:10px 8px 12px; }
+  
+  /* Modal */
+  .modal-backdrop{position:fixed;inset:0;background:rgba(3,7,18,0.55);display:flex;align-items:center;justify-content:center;z-index:1000}
+  .modal {background:var(--card);max-width:900px;width:94%;max-height:90vh;overflow:auto;padding:20px;border-radius:12px;box-shadow:0 12px 40px rgba(2,6,23,0.4);position:relative}
+  .modal img{max-width:100%;height:auto;border-radius:8px;margin-bottom:12px}
+  .modal .close-btn{position:absolute;right:12px;top:10px;background:transparent;border:none;font-size:22px;cursor:pointer}
+  
+  /* Responsive tweaks */
+  @media(max-width:640px){
+    .card-media{height:140px}
+    .grid{grid-template-columns: repeat(auto-fill,minmax(200px,1fr))}
+  }
+
+
+.header h1 { margin:0; }
+
+
+
+
+
+/* --- Сетка новостей --- */
+.news-list {
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:16px;
+}
+@media(max-width:720px){
+  .news-list { grid-template-columns: 1fr; }
+}
+
+/* карточка: картинка сверху, текст снизу */
+.news-card {
+  background:#fff;
+  border-radius:12px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 8px 24px rgba(12,18,30,0.06);
+  transition: transform .18s ease, box-shadow .18s ease;
+  cursor:pointer;
+}
+.news-card:hover { transform: translateY(-6px); box-shadow:0 18px 40px rgba(12,18,30,0.12); }
+
+.card .news-img { width:100%; height:300px; object-fit:contain; object-position:center; background:#f3f4f6; display:block; }
+.news-info { padding:12px 14px 16px; display:flex; flex-direction:column; gap:8px; }
+
+/* .meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+} */
+.meta-row { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.meta-left { display:flex; align-items:center; gap:8px; }
+/* .meta-date { color:#6b7280; font-size:0.85rem; } */
+.meta-date, .meta-time {
+  font-size: 0.85rem;
+  color: #555;
+}
+.meta-publisher { color:#374151; font-weight:600; font-size:0.88rem; margin-left:auto; }
+
+/* sentiment badge */
+.sent-badge {
+  padding:4px 8px;
+  border-radius:999px;
+  font-weight:700;
+  font-size:0.78rem;
+  color:#fff;
+  text-transform:capitalize;
+}
+.sent-positive { background:#16a34a; } /* green */
+.sent-negative { background:#ef4444; } /* red */
+.sent-neutral  { background:#6b7280; } /* gray */
+
+/* title/desc */
+.news-title { margin:0; font-size:1.02rem; line-height:1.25; color:#0f1724; }
+.news-desc { margin:0; color:#4b5563; font-size:0.95rem; max-height:84px; overflow:hidden; }
+
+/* tags */
+.tags-row { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
+.tag { background:#eef2ff; color:#1e3a8a; padding:4px 8px; border-radius:999px; font-size:0.78rem; font-weight:600; }
+
+/* small responsive tweak */
+@media(max-width:520px){
+  .card .news-img { height:180px; }
+}
+
+.load-more-btn {
+  display: block;
+  margin: 1.5rem auto;
+  padding: 10px 16px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.load-more-btn:hover {
+  background: #005ec4;
+}
+
+.controls {
+  padding-bottom: 15px;
+}

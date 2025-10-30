@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>News — Newsdata</title>
+  <link rel="stylesheet" href="/src/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="site-nav"></div>
+    <header class="header">
+      <h1>American news — stay tuned, stay informed!</h1>
+    </header>
+
+    <section class="card">
+      <div class="controls">
+        <input id="q" class="input" placeholder="Search by key words" />
+        <select id="categorySelect" class="input">
+          <option value="">All categories</option>
+        </select>
+        <button id="refreshBtn">Hot news</button>
+      </div>
+
+      <div id="newsMsg" class="small"></div>
+      <div id="newsList" class="grid news-list"></div>
+    </section>
+  </div>
+
+  <script type="module" src="/src/nav.js"></script>
+  <script type="module" src="/src/news.js"></script>
+</body>
+</html>
